@@ -12,9 +12,9 @@ import java.util.Date;
 
 import javax.print.attribute.standard.JobKOctetsSupported;
 
-import java.io.*;
+import java.io.*; //webistecontent
 import java.io.PrintWriter;
-import java.time.LocalDate;
+import java.time.LocalDate;//Dates
 import java.lang.*;
 import org.jsoup.nodes.Document;
 //import java.lang.Object;
@@ -26,11 +26,11 @@ public class App{
     public void SaveFile(URL websiteURL, String path) throws IOException{
 
         Document websiteContent = getContent(websiteURL);
-
+        
         contentIntoFile(path, websiteContent);
     }
 
-    private void contentIntoFile(String path, Document s){//Auszugebener Tect in die Datei = out
+    private void contentIntoFile(String path, Document s)throws FileNotFoundException{//Auszugebener Tect in die Datei = out
 
         PrintWriter out = null;
 
@@ -39,7 +39,13 @@ public class App{
         String DateString;// Datum wird in String gewandelt
         DateString = d.toString();
 
-        File f = new File(DateString);// neue Datei mit Datum als name soll erstellt werden
+        String title = DateString;
+
+        System.out.println(title);//for testing
+
+        File f = new File(path);// neue Datei mit Datum als name soll erstellt werden
+        
+        out = new PrintWriter(f);
 
         try {
         
@@ -58,20 +64,16 @@ public class App{
     private Document getContent(URL websiteURL) throws IOException{
         System.out.println(websiteURL);
         
-        String websiteURLString = websiteURL.toString();
+        String websiteURLString = websiteURL.toString();//URl of Webiste will be turned into String
 
-        Document doc = Jsoup.connect(websiteURLString).get();
+        Document doc = Jsoup.connect(websiteURLString).get(); // Content from Website will be truned into Document
         
-        Date d = new Date();
-        String dateString = d.toString();
-        
-        System.out.println(dateString);
-
-        String title = dateString;
-
-
-        System.out.println(title);
-        return doc;
+        //Date d = new Date(); 
+        //String dateString = d.toString(); // Date will be turned into String for Filename
+        //System.out.println(dateString); // for testing
+        //String title = dateString;
+        //System.out.println(title);//for testing
+        return doc; // Document with Content of Website will be returned
 
     }
 

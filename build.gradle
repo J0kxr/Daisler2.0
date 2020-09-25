@@ -26,9 +26,12 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.13'
+
+    // jsoup HTML parser library @ https://jsoup.org/
+    compile 'org.jsoup:jsoup:1.13.1'
 }
 
 application {
     // Define the main class for the application.
-    mainClassName = 'Daisler.App'
+    mainClassName = 'Daisler.Strg'
 }
