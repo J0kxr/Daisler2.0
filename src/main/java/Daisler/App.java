@@ -25,31 +25,39 @@ public class App{
 
     public void SaveFile(URL websiteURL, String path) throws IOException{
 
-        Document websiteContent = getContent(websiteURL);
+        String websiteContent = getContent(websiteURL);
         
         contentIntoFile(path, websiteContent);
     }
 
-    private void contentIntoFile(String path, Document s)throws FileNotFoundException{//Auszugebener Tect in die Datei = out
+    private void contentIntoFile(String path, Document s)throws FileNotFoundException, IOException{//Auszugebener Tect in die Datei = out
 
-        PrintWriter out = null;
-
-        Date d = new Date();//akutelles Datum wird in Datumsklasse erfasst
-
-        String DateString;// Datum wird in String gewandelt
-        DateString = d.toString();
-
-        String title = DateString;
-
-        System.out.println(title);//for testing
-
-        File f = new File(path);// neue Datei mit Datum als name soll erstellt werden
+        Date d = new Date();                //akutelles Datum wird in Datumsklasse erfasst
+        String DateString = d.toString();   //Datum wird in String gewandelt
+        String title = DateString;          //Titel wird zu Datum
+        System.out.println(title);          //for testing 2
         
-        out = new PrintWriter(f);
+        System.out.println(path);           //3
+
+        File f = new File(title);// neue Datei mit Datum als name soll erstellt werden
+
+        if (f.createNewFile()){
+            System.out.println("Datei generiert: " + f.getName() + DateString);
+        }else{
+            System.out.println("Datei existiert schon");
+        }
+        
+        FileWriter file = new FileWriter(title);
+        file.write(s);
+        
+
+
+        //PrintWriter out = null;
+
+        //out = new PrintWriter(f);
 
         try {
-        
-            out = new PrintWriter(f);
+            //out = new PrintWriter(f);
 
 
         }catch (FileNotFoundException e) {
@@ -57,15 +65,15 @@ public class App{
             System.out.println("Dateienfehler");
 
         }
-        out.print(s);
-        out.close();
+
+        file.close();
     }
 
     private Document getContent(URL websiteURL) throws IOException{
-        System.out.println(websiteURL);
+        System.out.println(websiteURL);//1
         
         String websiteURLString = websiteURL.toString();//URl of Webiste will be turned into String
-
+        
         Document doc = Jsoup.connect(websiteURLString).get(); // Content from Website will be truned into Document
         
         //Date d = new Date(); 
