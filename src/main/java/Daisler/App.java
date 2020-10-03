@@ -4,16 +4,18 @@
 package Daisler;
 
 //import jdk.internal.org.jline.utils.InputStreamReader;
-//import jdk.*;
-//import nio.*;
 
+
+import java.nio.file.*;
+import java.nio.charset.*;
+import java.nio.*;
+import java.nio.file.attribute.FileAttribute;
 import java.net.*;
 import java.util.Date;
 
 import javax.print.attribute.standard.JobKOctetsSupported;
 
 import java.io.*; //webistecontent
-import java.io.PrintWriter;
 import java.time.LocalDate;//Dates
 import java.lang.*;
 import org.jsoup.nodes.Document;
@@ -26,62 +28,72 @@ public class App{
     public void SaveFile(URL websiteURL, String path) throws IOException{
 
         String websiteContent = getContent(websiteURL);
-        
+        // save content from website into Doc type
         contentIntoFile(path, websiteContent);
+        //Should save the conent in the right file witg right path/directory
     }
 
-    private void contentIntoFile(String path, Document s)throws FileNotFoundException, IOException{//Auszugebener Tect in die Datei = out
+    private void contentIntoFile(String pathStr, String s)throws FileNotFoundException, IOException{//Auszugebener Tect in die Datei = out
 
-        Date d = new Date();                //akutelles Datum wird in Datumsklasse erfasst
-        String DateString = d.toString();   //Datum wird in String gewandelt
-        String title = DateString;          //Titel wird zu Datum
-        System.out.println(title);          //for testing 2
+        Date d = new Date();                
+        String DateString = d.toString();
+        //Datum wird in String gewandelt
+
+        DateString = "/" + DateString;  
+        //for path will / added 
         
-        System.out.println(path);           //3
+                
+        System.out.println(DateString);             //for testing 2
+        System.out.println(pathStr);                //3
+        
+        pathStr = pathStr + DateString;
+        Path path = Paths.get(pathStr);
+        //turned String into path type
 
-        File f = new File(title);// neue Datei mit Datum als name soll erstellt werden
+        Files.write(path, s.getBytes());
+        // s =content as string will be written into path
+        
+        /*
+        BufferedWriter writer = Files.newBufferedWriter(path, Charset.forName("UTF-8"), StandartOpenOption.write);
+        writer.write(path, "Hallu", StandardCharsets.UTF_8);
+
+        System.out.println(path.getClass());        //4
+         Files.createFile(path);
+        
+        File f = new File(DateString);// neue Datei mit Datum als name soll erstellt werden
+        Create new File with Date as the name
 
         if (f.createNewFile()){
-            System.out.println("Datei generiert: " + f.getName() + DateString);
+            System.out.println("Datei generiert: " + f.getName());
         }else{
             System.out.println("Datei existiert schon");
         }
-        
-        FileWriter file = new FileWriter(title);
-        file.write(s);
-        
 
 
-        //PrintWriter out = null;
+        FileWriter file = new FileWriter(DateString);
+        //Create new File with Date as the name
 
-        //out = new PrintWriter(f);
+        String ContentString =s.toString();
 
-        try {
-            //out = new PrintWriter(f);
-
-
-        }catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("Dateienfehler");
-
-        }
-
-        file.close();
+        file.write(ContentString);
+        // fills file with website content
+        */
     }
 
-    private Document getContent(URL websiteURL) throws IOException{
+    private String getContent(URL websiteURL) throws IOException{
         System.out.println(websiteURL);//1
         
         String websiteURLString = websiteURL.toString();//URl of Webiste will be turned into String
         
         Document doc = Jsoup.connect(websiteURLString).get(); // Content from Website will be truned into Document
         
+        String docString = doc.toString();
         //Date d = new Date(); 
         //String dateString = d.toString(); // Date will be turned into String for Filename
         //System.out.println(dateString); // for testing
         //String title = dateString;
         //System.out.println(title);//for testing
-        return doc; // Document with Content of Website will be returned
+        return docString; // Document with Content of Website will be returned
 
     }
 
