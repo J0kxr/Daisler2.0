@@ -29,7 +29,7 @@ public class App{
         contentIntoFile(path, websiteContent);
         //Should save the conent in the right file witg right path/directory
     }
-
+    
     private void contentIntoFile(String pathStr, String s)throws FileNotFoundException, IOException{//Auszugebener Tect in die Datei = out
 
         Date d = new Date();                
