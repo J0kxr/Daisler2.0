@@ -13,10 +13,12 @@ public class Strg{
         while(true){
         App a = new App(); // Neuer Website Download
         //Path p = Path.of("/home/torbeng/Dokumente/Websites");
+        App d = new App();//new Obejct for Diesel
 
 
         try {
-            a.SaveFile(new URL("https://www.benzinpreis-aktuell.de/benzinpreise-waldshuttiengen-heute") , "/home/torbeng/Dokumente/Websites"); //save text in file
+            a.SaveFile(new URL("https://www.benzinpreis-aktuell.de/benzinpreise-waldshuttiengen-heute") , "/home/torbeng/Dokumente/Websites"); //save text in file//Benzin
+            d.Savefile(new URL(URL), pathToDiesel);
 
         }catch (NullPointerException e) {
             e.printStackTrace();
