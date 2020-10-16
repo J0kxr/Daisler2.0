@@ -3,9 +3,6 @@
  */
 package Daisler;
 
-//import jdk.internal.org.jline.utils.InputStreamReader;
-
-
 import java.nio.file.*;
 import java.nio.charset.*;
 import java.nio.*;
@@ -37,10 +34,10 @@ public class App{
 
         Date d = new Date();                
         String DateString = d.toString();
-        //Datum wird in String gewandelt
+        //Date (for title) will turned into String
 
         DateString = "/" + DateString;  
-        //for path will / added 
+        //for the path will / added 
         
                 
         System.out.println(DateString);             //for testing 2
@@ -48,83 +45,10 @@ public class App{
         
         pathStr = pathStr + DateString;
         Path path = Paths.get(pathStr);
-        //turned String into path type
+        //turned path-String into path type
 
         Files.write(path, s.getBytes());
         // s =content as string will be written into path
-        
-        /*
-        BufferedWriter writer = Files.newBufferedWriter(path, Charset.forName("UTF-8"), StandartOpenOption.write);
-        writer.write(path, "Hallu", StandardCharsets.UTF_8);
-
-        System.out.println(path.getClass());        //4
-         Files.createFile(path);
-        
-        File f = new File(DateString);// neue Datei mit Datum als name soll erstellt werden
-        Create new File with Date as the name
-
-        if (f.createNewFile()){
-            System.out.println("Datei generiert: " + f.getName());
-        }else{
-            System.out.println("Datei existiert schon");
+        //it is also creatin a new file if it doesnt exist
         }
-
-
-        FileWriter file = new FileWriter(DateString);
-        //Create new File with Date as the name
-
-        String ContentString =s.toString();
-
-        file.write(ContentString);
-        // fills file with website content
-        */
-    }
-
-    private String getContent(URL websiteURL) throws IOException{
-        System.out.println(websiteURL);//1
-        
-        String websiteURLString = websiteURL.toString();//URl of Webiste will be turned into String
-        
-        Document doc = Jsoup.connect(websiteURLString).get(); // Content from Website will be truned into Document
-        
-        String docString = doc.toString();
-        //Date d = new Date(); 
-        //String dateString = d.toString(); // Date will be turned into String for Filename
-        //System.out.println(dateString); // for testing
-        //String title = dateString;
-        //System.out.println(title);//for testing
-        return docString; // Document with Content of Website will be returned
-
-    }
-
-    /*
-    private String getContent (URL websiteURL) throws IOException{ // Eingeholter Text der Webside 
- 
-        String newLine = "";
-        String text = "";
-
-        try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(websiteURL.openStream()));
-            System.out.print("Hello World!");
-
-            while (newLine == in.readLine()  != false){
-                System.out.print("Hello World!");
-
-                text = text + newLine;
-            }
-            in.close();
-
-        }catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("Websitefehler");}
-
-            System.out.println(text);//gibt Websitetext aus
-
-            return text;
-    }
-
-    */
-
-
-
 }
