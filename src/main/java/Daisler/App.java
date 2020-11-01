@@ -16,6 +16,8 @@ import java.io.*; //webistecontent
 import java.time.LocalDate;//Dates
 import java.lang.*;
 import org.jsoup.nodes.Document;
+
+
 //import java.lang.Object;
 import org.jsoup.*;
  
@@ -24,7 +26,7 @@ public class App{
 
     public void SaveFile(URL websiteURL, String path) throws IOException{
 
-        String websiteContent = getContent(websiteURL);
+        String websiteContent = getContent(websiteURL).toString();
         // save content from website into Doc type
         contentIntoFile(path, websiteContent);
         //Should save the conent in the right file witg right path/directory
@@ -40,8 +42,9 @@ public class App{
         //for the path will / added 
         
                 
-        System.out.println(DateString);             //for testing 2
-        System.out.println(pathStr);                //3
+        System.out.println("Datumspfad:" + DateString); 
+        System.out.println(" | ");       //for testing 2
+        System.out.println("Pfad als String(ohne Datum):"+ pathStr);                //3
         
         pathStr = pathStr + DateString;
         Path path = Paths.get(pathStr);
@@ -50,5 +53,23 @@ public class App{
         Files.write(path, s.getBytes());
         // s =content as string will be written into path
         //it is also creatin a new file if it doesnt exist
+        }
+
+        private Document getContent(URL websiteURL) throws IOException{
+            System.out.println("URLvonWeb:" + websiteURL);
+            
+            String websiteURLString = websiteURL.toString();
+    
+            Document doc = Jsoup.connect(websiteURLString).get();
+            /*
+            Date d = new Date();
+            String dateString = d.toString(); 
+            String title = dateString;
+        
+            System.out.println("DatrumAlsTitle:" + title);
+            System.out.println(" | ")
+            */
+            return doc;
+    
         }
 }
