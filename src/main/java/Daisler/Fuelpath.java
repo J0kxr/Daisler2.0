@@ -42,8 +42,8 @@ public String getFullPath(String fuelType)throws IOException{
     while(newDatePath.equals(DatePath)){
         
         if (fuelType == "Diesel"){
-            return "/home/torbeng/Dokumente/Websites/Diesel" + newDatePath; 
-    
+            System.out.println("/home/torbeng/Dokumente/Websites/Diesel" + newDatePath);
+            return "/home/torbeng/Dokumente/Websites/Diesel" + newDatePath;       
         }else if (fuelType == "Benzin"){
             return "/home/torbeng/Dokumente/Websites/Benzin" + newDatePath;
     
@@ -53,7 +53,7 @@ public String getFullPath(String fuelType)throws IOException{
     }
 
     if (fuelType == "Diesel"){ 
-        Path path = Paths.get("/home/torbeng/Dokumente/Websites/Diesel/" + newDatePath);     
+        Path path = Paths.get("/home/torbeng/Dokumente/Websites/Diesel" + newDatePath);     
         Files.createDirectories(path);
 
         fullNewPath = "/home/torbeng/Dokumente/Websites/Diesel" + newDatePath;
