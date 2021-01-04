@@ -18,10 +18,13 @@ public class Strg{
 
         App benzin = new App(); // Neuer Website Download
         App diesel = new App();//new Obejct for Diesel
-           
-        System.out.println("Benzinpfad:" + f.getFullPath("Benzin"));
-        System.out.println("Dieselpfad:" + f.getFullPath("Diesel"));
-        System.out.println(" | ");
+          
+        f.getFullPath("Benzin");
+        f.getFullPath("Diesel");
+
+        //System.out.println("Benzinpfad:" + f.getFullPath("Benzin"));
+        //System.out.println("Dieselpfad:" + f.getFullPath("Diesel"));
+        //System.out.println(" | ");
 
 
         try {
