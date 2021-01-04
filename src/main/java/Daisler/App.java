@@ -29,7 +29,7 @@ public class App{
         String websiteContent = getContent(websiteURL).toString();
         // save content from website into Doc type
         contentIntoFile(path, websiteContent);
-        //Should save the conent in the right file witg right path/directory
+        //Should save the conent in the right file with right path/directory
     }
     
     private void contentIntoFile(String pathStr, String s)throws FileNotFoundException, IOException{//Auszugebener Tect in die Datei = out
@@ -37,21 +37,22 @@ public class App{
         Date d = new Date();                
         String DateString = d.toString();
         //Date (for title) will turned into String
-
-        DateString = "/" + DateString;  
+        //Sun Jan 03 15:31:52 CET 2021
+        DateString = "/" + DateString + ".html";  
         //for the path will / added 
         
                 
-        System.out.println("Datumspfad:" + DateString); 
-        System.out.println(" | ");       //for testing 2
-        System.out.println("Pfad als String(ohne Datum):"+ pathStr);                //3
+        //System.out.println("Datumspfad:" + DateString); 
+        //System.out.println(" | ");       //for testing 2
+        //System.out.println("Pfad als String(ohne Datum):"+ pathStr);//3
         
         pathStr = pathStr + DateString;
+        System.out.println("pathStr: " + pathStr);
         Path path = Paths.get(pathStr);
         //turned path-String into path type
 
         Files.write(path, s.getBytes());
-        // s =content as string will be written into path
+        // s =content as string will be written into location of path
         //it is also creatin a new file if it doesnt exist
         }
 
